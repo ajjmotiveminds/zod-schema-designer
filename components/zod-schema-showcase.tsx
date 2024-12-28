@@ -3,8 +3,8 @@
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Plus } from 'lucide-react'
-import { SchemaField } from './zod-schema-designer/types'
-import { ZodSchemaDesigner } from './zod-schema-designer/zod-schema-designer'
+import { SchemaField, SchemaType } from '@/components/zod-schema-designer/types'
+import { ZodSchemaDesigner } from '@/components/zod-schema-designer/zod-schema-designer'
 import {
   Sidebar,
   SidebarContent,
@@ -136,7 +136,7 @@ const sampleCollections = {
       { name: 'grandTotal', type: 'calculated', calculatedField: { dependencies: ['totalAmount', 'tax', 'shippingCost'], formula: '(totalAmount, tax, shippingCost) => totalAmount + tax + shippingCost' }, description: 'Grand total including tax and shipping' },
     ]
   },
-};
+} satisfies Record<string, SchemaField>;
 
 export function ZodSchemaShowcase() {
   const [collections, setCollections] = useState(sampleCollections);

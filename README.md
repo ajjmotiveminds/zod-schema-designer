@@ -17,7 +17,7 @@ The Zod Schema Designer is a powerful and flexible component for creating and ed
 Then, use the shadcn CLI to add the component:
 
 ```bash
-npx shadcn-ui@latest add --from=https://github.com/Bishoymly/zod-schema-designer/tree/main/components/ui/zod-schema-designer
+npx shadcn-ui@latest add --from=https://github.com/Bishoymly/zod-schema-designer/tree/main/components/zod-schema-designer
 ```
 
 This will add the ZodSchemaDesigner component and its dependencies to your project.
