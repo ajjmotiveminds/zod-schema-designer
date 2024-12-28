@@ -14,11 +14,11 @@ The Zod Schema Designer is a powerful and flexible component for creating and ed
 
 ## Installation
 
-To install the Zod Schema Designer in your project, use the shadcn CLI:
+Then, use the shadcn CLI to add the component:
 
-\`\`\`bash
-npx shadcn@latest add zod-schema-designer
-\`\`\`
+```bash
+npx shadcn-ui@latest add --from=https://github.com/Bishoymly/zod-schema-designer/tree/main/components/ui/zod-schema-designer
+```
 
 This will add the ZodSchemaDesigner component and its dependencies to your project.
 
@@ -26,7 +26,7 @@ This will add the ZodSchemaDesigner component and its dependencies to your proje
 
 Here's a comprehensive example of how to use the ZodSchemaDesigner component with both JSON and Zod schemas:
 
-\`\`\`jsx
+```jsx
 import { useState } from 'react'
 import { ZodSchemaDesigner } from "@/components/ui/zod-schema-designer"
 import { z } from 'zod'
@@ -81,13 +81,13 @@ export default function SchemaEditor() {
     </div>
   );
 }
-\`\`\`
+```
 
 ## Setting an Initial Schema
 
 You can set an initial schema using either a JSON object that follows the `SchemaField` type structure or a Zod schema:
 
-\`\`\`javascript
+```javascript
 // JSON schema
 const initialJsonSchema = {
   name: 'YourSchemaName',
@@ -105,7 +105,7 @@ const initialZodSchema = z.object({
   field2: z.number().min(0).max(100),
   // Add more fields as needed
 });
-\`\`\`
+```
 
 Pass either `initialJsonSchema` or `initialZodSchema` to the `ZodSchemaDesigner` component as the `initialSchema` prop.
 
@@ -113,7 +113,7 @@ Pass either `initialJsonSchema` or `initialZodSchema` to the `ZodSchemaDesigner`
 
 The `onSave` function receives the updated schema in JSON format. If you need the Zod schema, you can convert it using the `jsonToZod` utility function:
 
-\`\`\`javascript
+```javascript
 import { jsonToZod } from "@/components/ui/zod-schema-designer/schema-utils"
 
 const handleSave = (updatedJsonSchema) => {
@@ -126,13 +126,13 @@ const handleSave = (updatedJsonSchema) => {
 
   // Use the schemas as needed (e.g., save to state, send to server, etc.)
 };
-\`\`\`
+```
 
 ## Saving the Schema
 
 Here's an example of how to save the schema to a file:
 
-\`\`\`jsx
+```jsx
 import { useState } from 'react'
 import { ZodSchemaDesigner } from "@/components/ui/zod-schema-designer"
 import { jsonToZod } from "@/components/ui/zod-schema-designer/schema-utils"
@@ -173,7 +173,7 @@ export default function SchemaEditor() {
     />
   );
 }
-\`\`\`
+```
 
 This example will save both JSON and Zod representations of the schema when the user clicks the "Save Changes" button.
 
