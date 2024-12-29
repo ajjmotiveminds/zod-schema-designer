@@ -19,7 +19,7 @@ First, make sure you have shadcn/ui set up in your project. If not, follow the [
 Then, use the shadcn CLI to add the component:
 
 ```bash
-npx shadcn-ui@latest add --from=https://github.com/Bishoymly/zod-schema-designer/tree/main/components/zod-schema-designer
+npx shadcn@latest add --from=https://github.com/Bishoymly/zod-schema-designer/blob/main/components.json
 ```
 
 This will add the ZodSchemaDesigner component and its dependencies to your project.
