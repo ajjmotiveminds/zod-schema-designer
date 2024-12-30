@@ -10,6 +10,7 @@ async function buildRegistry() {
     name: "zod-schema-designer",
     type: "registry:ui",
     registryDependencies: [
+      "badge",
       "button",
       "dialog",
       "input",
