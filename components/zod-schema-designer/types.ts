@@ -9,6 +9,7 @@ export interface ValidationOptions {
   max?: number;
   regex?: string;
   custom?: string;
+  default?: string;
 }
 
 export interface CalculatedFieldOptions {

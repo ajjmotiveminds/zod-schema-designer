@@ -20,7 +20,6 @@ interface SchemaFieldEditorProps {
 export const SchemaFieldEditor: React.FC<SchemaFieldEditorProps> = ({ 
   field, 
   onUpdate, 
-  onDelete, 
   depth, 
   availableFields, 
   selectedField, 

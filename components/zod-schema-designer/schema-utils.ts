@@ -26,6 +26,10 @@ export const generateZodSchema = (field: SchemaField): string => {
       if (f.validations.max !== undefined) schema += `.max(${f.validations.max})`;
       if (f.validations.regex) schema += `.regex(/${f.validations.regex}/)`;
       if (f.validations.custom) schema += `.refine(${f.validations.custom})`;
+      if (f.validations.default) {
+        const defaultValue = f.type === 'string' ? `"${f.validations.default}"` : f.validations.default;
+        schema += `.default(${defaultValue})`;
+      }
     }
 
     if (f.type === 'enum' && f.enumValues) {
@@ -63,19 +67,13 @@ export default ${field.name}Schema;`;
 }
 
 export const zodToJson = (zodSchema: z.ZodType<any>): SchemaField => {
-  const schemaDefinition = zodSchema._def;
-  const schemaField: SchemaField = {
-    name: 'root',
-    type: 'object',
-    children: []
-  };
-
+  
   const processZodType = (zodType: z.ZodType<any>, name: string = 'root'): SchemaField => {
     const field: SchemaField = { name, type: 'string' };
 
     if (zodType instanceof z.ZodObject) {
       field.type = 'object';
-      field.children = Object.entries(zodType.shape).map(([key, value]) => processZodType(value, key));
+      field.children = Object.entries(zodType.shape).map(([key, value]) => processZodType(value as z.ZodType<any>, key));
     } else if (zodType instanceof z.ZodArray) {
       field.type = 'array';
       field.children = [processZodType(zodType.element, 'item')];
@@ -91,13 +89,18 @@ export const zodToJson = (zodSchema: z.ZodType<any>): SchemaField => {
     }
 
     field.validations = {};
-    if (zodType._def.isOptional) {
+    if (zodType.isOptional()) {
       field.validations.required = false;
     }
 
-    if ('minimum' in zodType._def) field.validations.min = zodType._def.minimum;
-    if ('maximum' in zodType._def) field.validations.max = zodType._def.maximum;
-    if ('regex' in zodType._def) field.validations.regex = zodType._def.regex.source;
+    if (zodType instanceof z.ZodNumber) {
+      if ('minimum' in zodType._def) field.validations.min = zodType._def.minimum as number;
+      if ('maximum' in zodType._def) field.validations.max = zodType._def.maximum as number;
+    }
+    
+    if (zodType instanceof z.ZodString && 'regex' in zodType._def) {
+      field.validations.regex = (zodType._def.regex as RegExp).source;
+    }
 
     return field;
   };

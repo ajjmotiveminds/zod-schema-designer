@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Copy, Check, Save } from 'lucide-react'
-import { SchemaField, ZodSchemaDesignerProps, InitialSchema } from './types'
+import { SchemaField, ZodSchemaDesignerProps } from './types'
 import { SchemaFieldEditor } from './schema-field-editor'
 import { PropertiesPanel } from './properties-panel'
 import { generateZodSchema, zodToJson } from './schema-utils'

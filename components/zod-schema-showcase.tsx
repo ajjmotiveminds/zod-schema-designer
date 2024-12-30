@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Plus } from 'lucide-react'
-import { SchemaField, SchemaType } from '@/components/zod-schema-designer/types'
+import { SchemaField } from '@/components/zod-schema-designer/types'
 import { ZodSchemaDesigner } from '@/components/zod-schema-designer/zod-schema-designer'
 import {
   Sidebar,
