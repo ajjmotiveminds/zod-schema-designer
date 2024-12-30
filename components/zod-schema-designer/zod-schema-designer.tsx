@@ -137,7 +137,6 @@ export function ZodSchemaDesigner({ initialSchema, onSave, showGeneratedCode = t
             onUpdate={handleFieldUpdate}
             onDelete={handleFieldDelete}
             availableFields={availableFields}
-            isNewField={newField === selectedField}
           />
         )}
       </div>

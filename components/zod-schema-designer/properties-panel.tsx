@@ -12,10 +12,9 @@ interface PropertiesPanelProps {
   onUpdate: (field: SchemaField) => void;
   onDelete: () => void;
   availableFields: string[];
-  isNewField: boolean;
 }
 
-export function PropertiesPanel({ field, onUpdate, onDelete, availableFields, isNewField }: PropertiesPanelProps) {
+export function PropertiesPanel({ field, onUpdate, onDelete, availableFields }: PropertiesPanelProps) {
   const handleChange = <K extends keyof SchemaField>(key: K, value: SchemaField[K]) => {
     const updatedField = { ...field, [key]: value };
     if (key === 'type') {
