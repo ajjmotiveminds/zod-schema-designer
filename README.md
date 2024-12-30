@@ -2,6 +2,8 @@
 
 The Zod Schema Designer is a powerful and flexible component for creating and editing Zod schemas visually. It can be easily integrated into any project using the shadcn CLI.
 
+![Demo](./demo01.png)
+
 ## Features
 
 - Visual schema editor with support for nested fields

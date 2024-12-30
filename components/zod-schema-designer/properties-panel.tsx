@@ -168,7 +168,7 @@ export function PropertiesPanel({ field, onUpdate, onDelete, availableFields, is
         />
       </div>
 
-      {!isNewField && (
+      {field.name !== 'root' && (
         <>
           <Separator />
           <div className="flex justify-end">
