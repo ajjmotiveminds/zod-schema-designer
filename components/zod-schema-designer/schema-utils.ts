@@ -66,14 +66,15 @@ const ${field.name}Schema = ${generateField(field)};
 export default ${field.name}Schema;`;
 }
 
-export const zodToJson = (zodSchema: z.ZodType<any>): SchemaField => {
-  
-  const processZodType = (zodType: z.ZodType<any>, name: string = 'root'): SchemaField => {
+export const zodToJson = (zodSchema: z.ZodTypeAny): SchemaField => {
+  const processZodType = (zodType: z.ZodTypeAny, name: string = 'root'): SchemaField => {
     const field: SchemaField = { name, type: 'string' };
 
     if (zodType instanceof z.ZodObject) {
       field.type = 'object';
-      field.children = Object.entries(zodType.shape).map(([key, value]) => processZodType(value as z.ZodType<any>, key));
+      field.children = Object.entries(zodType.shape).map(([key, value]) => 
+        processZodType(value as z.ZodTypeAny, key)
+      );
     } else if (zodType instanceof z.ZodArray) {
       field.type = 'array';
       field.children = [processZodType(zodType.element, 'item')];

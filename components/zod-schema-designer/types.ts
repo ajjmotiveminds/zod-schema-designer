@@ -1,4 +1,3 @@
-import { ComponentType } from 'react';
 import { z } from 'zod';
 
 export type SchemaType = 'string' | 'number' | 'boolean' | 'array' | 'object' | 'enum' | 'union' | 'date' | 'file' | 'calculated';
@@ -25,13 +24,10 @@ export interface SchemaField {
   enumValues?: string[];
   validations?: ValidationOptions;
   label?: string;
-  displayComponent?: ComponentType<any>;
-  editComponent?: ComponentType<any>;
-  filterComponent?: ComponentType<any>;
   calculatedField?: CalculatedFieldOptions;
 }
 
-export type InitialSchema = SchemaField | z.ZodType<any>;
+export type InitialSchema = SchemaField | z.ZodTypeAny;
 
 export interface ZodSchemaDesignerProps {
   initialSchema: InitialSchema;
