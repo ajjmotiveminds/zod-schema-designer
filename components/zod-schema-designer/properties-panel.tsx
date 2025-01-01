@@ -40,7 +40,7 @@ export function PropertiesPanel({ field, onUpdate, onDelete, availableFields }: 
   return (
     <div className="p-4 space-y-4">
       <div>
-        <h2 className="text-lg font-semibold mb-4">Properties</h2>
+        <h2 className="text-lg font-semibold mb-4 hidden md:block">Properties</h2>
         <div className="grid gap-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
@@ -170,7 +170,7 @@ export function PropertiesPanel({ field, onUpdate, onDelete, availableFields }: 
       {field.name !== 'root' && (
         <>
           <Separator />
-          <div className="flex justify-end">
+          <div className="flex justify-start">
             <Button variant="destructive" onClick={onDelete}>
               Delete Field
             </Button>

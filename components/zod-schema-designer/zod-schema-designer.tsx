@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
-import { Copy, Check, Save } from 'lucide-react'
+import { Copy, Check, Save, X } from 'lucide-react'
 import { SchemaField, ZodSchemaDesignerProps } from './types'
 import { SchemaFieldEditor } from './schema-field-editor'
 import { PropertiesPanel } from './properties-panel'
@@ -17,6 +17,7 @@ export function ZodSchemaDesigner({ initialSchema, onSave, showGeneratedCode = t
   const [isCopied, setIsCopied] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [newField, setNewField] = useState<SchemaField | null>(null);
+  const [showPropertiesPanel, setShowPropertiesPanel] = useState(false);
 
   useEffect(() => {
     setSchema(initialSchema instanceof z.ZodType ? zodToJson(initialSchema) : initialSchema);
@@ -84,6 +85,7 @@ export function ZodSchemaDesigner({ initialSchema, onSave, showGeneratedCode = t
       return updatedSchema || prevSchema;
     });
     setSelectedField(null);
+    setShowPropertiesPanel(false);
     setHasUnsavedChanges(true);
   };
 
@@ -98,11 +100,12 @@ export function ZodSchemaDesigner({ initialSchema, onSave, showGeneratedCode = t
   const handleAddField = (newField: SchemaField) => {
     setSelectedField(newField);
     setNewField(newField);
+    setShowPropertiesPanel(true);
   };
 
   return (
-    <div className="flex h-full">
-      <div className="w-2/3 overflow-auto border-r">
+    <div className="flex h-full relative">
+      <div className={`w-full md:w-2/3 overflow-auto transition-all ${showPropertiesPanel ? 'hidden md:block' : 'block'}`}>
         <div className="p-4">
           <SchemaFieldEditor
             field={schema}
@@ -130,16 +133,22 @@ export function ZodSchemaDesigner({ initialSchema, onSave, showGeneratedCode = t
           </div>
         )}
       </div>
-      <div className="w-1/3 overflow-auto">
-        {selectedField && (
+      {selectedField && (
+        <div className={`fixed md:relative top-0 left-0 w-full md:w-1/3 h-full bg-white overflow-auto border-l transition-all ${showPropertiesPanel ? 'block' : 'hidden md:block'}`}>
+          <div className="flex items-center justify-between p-4 border-b md:hidden">
+            <h2 className="text-lg font-semibold">Properties</h2>
+            <Button variant="ghost" size="icon" onClick={() => setShowPropertiesPanel(false)}>
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
           <PropertiesPanel
             field={selectedField}
             onUpdate={handleFieldUpdate}
             onDelete={handleFieldDelete}
             availableFields={availableFields}
           />
-        )}
-      </div>
+        </div>
+      )}
       <div className="absolute bottom-4 right-4">
         <Button
           onClick={handleSave}
