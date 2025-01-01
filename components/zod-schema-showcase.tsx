@@ -177,10 +177,10 @@ export function ZodSchemaShowcase() {
       <div className="flex h-screen w-full">
         <Sidebar className="flex-shrink-0">
           <SidebarHeader>
-          <h2 className="text-xl font-bold p-4">Zod Schema Designer Demo</h2>
+            <h2 className="text-xl font-bold p-4">Zod Schema Designer Demo</h2>
           </SidebarHeader>
-          <SidebarContent>
-            <SidebarMenu className="px-4">
+          <SidebarContent className="flex flex-col h-[calc(100vh-4rem)]">
+            <SidebarMenu className="px-4 flex-grow">
               {Object.keys(collections).map((collectionName) => (
                 <SidebarMenuItem key={collectionName}>
                   <SidebarMenuButton
@@ -223,6 +223,9 @@ export function ZodSchemaShowcase() {
                 </Dialog>
               </SidebarMenuItem>
             </SidebarMenu>
+            <div className="p-4 text-sm text-gray-500 border-t">
+              © {new Date().getFullYear()} Bishoy Labib. MIT License.
+            </div>
           </SidebarContent>
         </Sidebar>
         <div className="flex-grow overflow-hidden">
